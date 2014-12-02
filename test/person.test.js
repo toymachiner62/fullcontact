@@ -24,8 +24,21 @@ describe('FullContact.Person', function () {
 
   describe('#email', function () {
     it('retrieves data by e-mail', function (done) {
-      api.person.email('arnout@observe.it', done);
+      api.person.email('arnout@observe.it', function(err, data) {
+				expect(data.status).to.equal(200);
+				done();
+      });
     });
+		
+		it.only('handles a 404 status properly', function(done) {
+			api.person.email('dick@gmail.com', function(err, data) {
+				
+				
+				console.log(err);
+				console.log(data);
+				done();
+			});
+		});
 
     it('provides the proper casing');
   });
